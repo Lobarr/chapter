@@ -1,0 +1,22 @@
+name: CI Workflow 
+on: [push, pull_request]
+jobs:
+  build:
+    name: build and test
+    runs-on: ubuntu-18.10
+    strategy:
+      matrix:
+        node-version: [10.x, 11.x]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with: 
+          node-version: ${{ matrix.node-version }}
+      - name: install, lint, build, and test
+        run: |
+          npm ci
+          npm run next:build
+          npm run test
+        env:
+          NODE_ENV=development
