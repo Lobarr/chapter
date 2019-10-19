@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
   build:
     name: build and test
-    runs-on: ubuntu-18.10
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [10.x, 11.x]
